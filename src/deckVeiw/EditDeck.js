@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useParams, Link , useHistory, useRouteMatch } from "react-router-dom";
 import { readDeck, updateDeck } from "../utils/api";
 
-function EditDeck({updateDecks}) {
+function EditDeck({updateDeckCount}) {
     const [deck, editDeck] = useState({name:'', description:'', id: 0})
     const history = useHistory()
     const {deckId} = useParams()
@@ -27,13 +27,13 @@ function EditDeck({updateDecks}) {
             }
             getDeck()
             return () => abortController.abort
-        },[deckId])
+        },[deckId, history])
 
         const handleSubmit = async (event) => {
             event.preventDefault()
            const response = await updateDeck(deck)
            history.push(`/decks/${response.id}`)
-           updateDecks(1)
+           updateDeckCount(1)
         }
 
         const handleChange = ({target}) => {

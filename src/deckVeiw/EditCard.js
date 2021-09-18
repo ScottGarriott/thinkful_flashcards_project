@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import { useParams, Link , useHistory } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../utils/api";
+import CardForm from "./CardForm";
 
 
-function EditCard({updateDecks}) {
+function EditCard({updateDeckCount}) {
     const [card, editCard] = useState({front:'', back:''})
     const [deck, setDeck] = useState({})
     const {deckId, cardId} = useParams()
@@ -26,7 +27,7 @@ function EditCard({updateDecks}) {
             }
             getDeck()
             return () => abortController.abort
-        },[deckId])
+        },[deckId, history])
 
         useEffect(() => {
             const abortController = new AbortController()
@@ -45,13 +46,13 @@ function EditCard({updateDecks}) {
                 }
                 getCard()
                 return () => abortController.abort
-            },[cardId])
+            },[cardId, history])
 
             const handleSubmit = async (event) => {
                 event.preventDefault()
-               const response = await updateCard(card)
+                await updateCard(card)
                history.push(`/decks/${deckId}`)
-               updateDecks(1)
+               updateDeckCount(1)
             }
     
             const handleChange = ({target}) => {
@@ -84,41 +85,7 @@ function EditCard({updateDecks}) {
                     </nav>
                 </div>
                 <h1>Edit Card</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <div className="form-group">
-                            <label htmlFor="newCardFront">Card Front</label>
-                            <textarea
-                            type="text" 
-                            name="front" 
-                            placeholder="Card Front" 
-                            className="form-control" 
-                            required 
-                            id="front"
-                            onChange={handleChange}
-                            value={card.front}
-                            >
-                            </textarea>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="newDeckDescription">Card Back</label>
-                        <textarea 
-                        name="back" 
-                        placeholder="Card Back" 
-                        className="form-control" 
-                        required 
-                        id="back"
-                        onChange={handleChange}
-                        value={card.back}
-                        >
-                        </textarea>
-                    </div>
-                    <div>
-                        <button type="submit" className="btn btn-primary">Save</button>
-                        <button type="cancel" className="btn btn-secondary" onClick={doneHandler}>Done</button>
-                    </div>
-                </form>
+                    <CardForm doneHandler={doneHandler}  handleChange={handleChange} handleSubmit={handleSubmit} card={card}/>
                 </div>
                 )
 }

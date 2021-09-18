@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../header/Header";
 import NotFound from "../notFound/NotFound";
 import Decks from "../decks/Decks";
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import Home from "../home/Home";
 
 //first we need to get the decks
@@ -12,7 +12,7 @@ function Layout() {
 
   const [deckLength, setDeckLength] = useState(0);
 
-  const updateDecks = (newDecks) => {
+  const updateDeckCount= (newDecks) => {
     setDeckLength(() => deckLength + newDecks)
   }
   
@@ -24,10 +24,10 @@ function Layout() {
 
         <Switch>
         <Route exact path="/">
-        <Home updateDecks={updateDecks} deckLength={deckLength}/>
+        <Home updateDeckCount={updateDeckCount} deckLength={deckLength}/>
         </Route>
         <Route path="/decks">
-        <Decks updateDecks={updateDecks} />
+        <Decks updateDeckCount={updateDeckCount} />
         </Route>
         <Route>
         <NotFound />

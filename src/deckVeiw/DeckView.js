@@ -3,7 +3,7 @@ import { useParams, Link , useHistory, useRouteMatch } from "react-router-dom";
 import { readDeck,deleteDeck, deleteCard } from "../utils/api";
 
 
-function DeckView({updateDecks}) {
+function DeckView({updateDeckCount}) {
     
     const initialCurrentDeck = {
         id: 0,
@@ -36,12 +36,12 @@ function DeckView({updateDecks}) {
     }
         getDeck()
         return () => abortController.abort()
-    }, [])
+    }, [deckId, history])
 
     const deckDeleteHandler = async () => {
         if (window.confirm("Are you sure you want to delete this deck? You will not be able to recover it.")) {
             await deleteDeck(id)
-            updateDecks(-1)
+            updateDeckCount(-1)
             history.push('/')
         } else {
             history.go(0)

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { useParams, Link , useHistory } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
+import CardForm from "./CardForm";
 
 function NewCard() {
     const params = useParams()
@@ -32,7 +33,7 @@ function NewCard() {
             }
             getDeck()
             return () => abortController.abort
-        },[deckId])
+        },[deckId, history])
 
 
     const handleChange = ({target}) => {
@@ -46,6 +47,8 @@ function NewCard() {
         event.preventDefault()
         createCard(deckId, formData)
         setFormData(initialFormState)
+        alert('Card Created!')
+        //history.push(`/decks/${deckId}`)
     }
 
     const doneHandler = () => {
@@ -68,44 +71,9 @@ function NewCard() {
             </ol>
         </nav>
     <h1>Add Card</h1>
-    <form onSubmit={handleSubmit}>
-        <div>
-            <div className="form-group">
-                <label htmlFor="newCardFront">Card Front</label>
-                <textarea
-                type="text" 
-                name="front" 
-                placeholder="Card Front" 
-                className="form-control" 
-                required 
-                id="front"
-                onChange={handleChange}
-                value={formData.front}
-                >
-                </textarea>
-            </div>
-        </div>
-        <div className="form-group">
-            <label htmlFor="newDeckDescription">Card Back</label>
-            <textarea 
-            name="back" 
-            placeholder="Card Back" 
-            className="form-control" 
-            required 
-            id="back"
-            onChange={handleChange}
-            value={formData.back}
-            >
-            </textarea>
-        </div>
-        <div>
-            <button type="submit" className="btn btn-primary">Save</button>
-            <button type="cancel" className="btn btn-secondary" onClick={doneHandler}>Done</button>
-        </div>
-    </form>
+    <CardForm doneHandler={doneHandler}  handleChange={handleChange} handleSubmit={handleSubmit} card={formData}/>
     </div>
     )
 }
-
 
 export default NewCard

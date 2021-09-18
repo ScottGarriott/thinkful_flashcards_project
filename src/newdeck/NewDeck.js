@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useHistory, Link } from "react-router-dom";
 import { createDeck } from "../utils/api";
 
-function NewDeck() {
+function NewDeck({ updateDeckCount }) {
     const initialState = {
         name: '',
         description: ''
@@ -15,6 +15,8 @@ function NewDeck() {
         event.preventDefault();
         createDeck(formData);
         setFormData(initialState);
+        updateDeckCount(1)
+        alert('Deck Created!')
     }
 
     const handleChange = ({target}) => {

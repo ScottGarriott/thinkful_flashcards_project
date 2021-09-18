@@ -33,7 +33,7 @@ function Study () {
     }
         getDeck()
         return () => abortController.abort()
-    }, [])
+    }, [deckId, history])
 
 
     

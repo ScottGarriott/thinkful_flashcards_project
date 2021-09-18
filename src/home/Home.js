@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { listDecks, deleteDeck } from "../utils/api";
 import CreateDeckButton from "./CreateDeckButton";
 import { Link } from "react-router-dom";
-function Home({ updateDecks, deckLength }) {
+function Home({ updateDeckCount, deckLength }) {
     const [decks, setDecks] = useState([]);
     const history = useHistory()
 
@@ -15,7 +15,7 @@ function Home({ updateDecks, deckLength }) {
         }
         getDecks()
         return () => abortController.abort()
-    }, [deckLength])
+    }, [])
     
    
 
@@ -30,7 +30,7 @@ function Home({ updateDecks, deckLength }) {
                      const deleteHandler = async () => {
                         if (window.confirm("Are you sure you want to delete this deck? You will not be able to recover it.")) {
                             await deleteDeck(id)
-                            updateDecks(-1)
+                            updateDeckCount(-1)
                             history.go(0)
                         } else {
                             history.go(0)

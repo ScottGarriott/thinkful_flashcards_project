@@ -24,7 +24,7 @@
   "cards": [
     {
       "id": 1,
-      "front": "Differentiate between Real DOM and Virtual DOM.",
+      "front": "Differentiate between Real DOM and Virtual DOM. 4949",
       "back": "Virtual DOM updates are faster but do not directly update the HTML",
       "deckId": 1
     },
@@ -95,6 +95,24 @@
       "back": "Render",
       "deckId": 1,
       "id": 9
+    },
+    {
+      "front": "This is a new card",
+      "back": "Hello this is a newish cardish",
+      "deckId": 1,
+      "id": 10
+    },
+    {
+      "front": "This is a seccond new card ",
+      "back": "this card is stupid",
+      "deckId": 1,
+      "id": 11
+    },
+    {
+      "front": "Here is a new code",
+      "back": "here is a new card",
+      "deckId": 1,
+      "id": 12
     }
   ]
 }

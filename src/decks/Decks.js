@@ -8,15 +8,15 @@ import NewCard from "../deckVeiw/NewCard";
 import EditDeck from "../deckVeiw/EditDeck";
 import EditCard from "../deckVeiw/EditCard";
 
-function Decks({updateDecks}) {
+function Decks({updateDeckCount}) {
     return (
         <div>
     <Switch>
         <Route path='/decks/new'>
-            <NewDeck  />
+            <NewDeck updateDeckCount={updateDeckCount} />
         </Route>
         <Route exact path='/decks/:deckId'>
-            <DeckView updateDecks={updateDecks} />
+            <DeckView updateDeckCount={updateDeckCount} />
         </Route>
         <Route path='/decks/:deckId/study'>
             <Study />
@@ -25,10 +25,10 @@ function Decks({updateDecks}) {
             <NewCard />
         </Route>
         <Route path='/decks/:deckId/edit'>
-            <EditDeck updateDecks={updateDecks} />
+            <EditDeck updateDeckCount={updateDeckCount} />
         </Route>
         <Route path='/decks/:deckId/cards/:cardId/edit'>
-            <EditCard updateDecks={updateDecks} />
+            <EditCard updateDeckCount={updateDeckCount} />
         </Route>
         <Route>
             <NotFound />
