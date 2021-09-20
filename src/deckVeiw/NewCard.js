@@ -51,7 +51,9 @@ function NewCard() {
         //history.push(`/decks/${deckId}`)
     }
 
-    const doneHandler = () => {
+    const doneHandler = (event) => {
+        event.preventDefault()
+        setFormData(initialFormState)
         history.push(`/decks/${deckId}`)
     }
 

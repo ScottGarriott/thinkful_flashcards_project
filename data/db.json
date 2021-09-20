@@ -113,6 +113,12 @@
       "back": "here is a new card",
       "deckId": 1,
       "id": 12
+    },
+    {
+      "front": "think",
+      "back": "flu",
+      "deckId": 1,
+      "id": 13
     }
   ]
 }
